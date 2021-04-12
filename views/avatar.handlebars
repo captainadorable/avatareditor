@@ -1,0 +1,142 @@
+<div class="container text-center" style="margin: auto;">
+
+    <h1 class="text-center" style="margin: auto; padding-top: 3rem; padding-bottom: 1rem;">Avatar Editor</h1>
+    
+    <p class="text-center fs-4" style="padding-top: 1rem;">Avatarına ne yapayım?</p>
+    <div class="dropdown show" style="margin:auto; padding-bottom: 1rem; ">
+        
+        <button onclick="myFunction()" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Lütfen bir efekt seç!
+        </button>
+
+        <div class="container" style="margin: auto; width: 0%; padding-right: 12rem;">
+            <div id="dropdown" class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#" onclick="selectEffect1()">Chocolate milk</a>
+                <a class="dropdown-item" href="#" onclick="selectEffect2()">Trump</a>
+                <a class="dropdown-item" href="#" onclick="selectEffect3()">Disabilities</a>
+            </div>
+        </div>
+         
+    </div>
+
+
+    <div class = "form-group" style="margin: auto; padding-top: 3rem;"> 
+
+        <div>
+            <div class="text-center" style="padding-left: 5rem; display: none;">
+                <input type="file" id="img" accept="image/*" class="form-control-file">
+            </div>
+        </div>
+        <label class="text-center fs-4" for="select">Bir avatar seç!</label>
+        <br>
+        <label class="text-center fs-5" for="select" style="padding-top: 1rem;">Avatarın 512x512 olmalı!</label>
+        <div style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
+            <button id = "select" class="btn btn-outline-primary" onclick="selectimage()">Seç!</button>
+        </div>
+    </div>
+
+    <div>
+        <canvas width="512" height="512" id="canvas" style="padding-bottom: 5rem;">
+            This browser is not supported
+        </canvas>
+    </div>
+
+    
+    <script>
+        function myFunction() {
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+    </script>
+
+    <script>
+        var effect = "chocolate-milk.png"
+        var canvas = document.querySelector('canvas'),
+        ctx = canvas.getContext('2d');
+        if (!(canvas.getContext)) {
+            alert('This browser is not supported');
+        }
+
+        function selectimage() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            document.getElementById("img").click()
+        }
+
+
+        function selectEffect1() {
+            effect = "chocolate-milk.png"
+            myFunction()
+        }
+        function selectEffect2() {
+            effect = "trump.png"
+            myFunction()
+        }
+        function selectEffect3() {
+            effect = "disabilities.png"
+            myFunction()
+        }
+
+        document.getElementById('img').onchange = function (evt) {
+            
+
+            var reader = new FileReader();
+            reader.onload = function(event){
+
+                if(effect == "chocolate-milk.png") {
+                    var img = new Image();
+
+                    img.onload = function(){
+                        ctx.drawImage(img,0,0,512, 512);
+                    }
+                    img.src = event.target.result;
+
+                    var img2 = new Image()
+
+                    img2.onload = function() {
+                        ctx.drawImage(img2, 0,0, 512, 512)
+                    }
+                    img2.src = `../../images/${effect}`  
+                }
+                
+                if(effect == "trump.png") {
+                    var img = new Image();
+
+                    img.onload = function(){
+                        ctx.drawImage(img,130,300,220, 260);
+                    }
+                    img.src = event.target.result;
+
+                    
+                    var img2 = new Image()
+
+                    img2.onload = function() {
+                        ctx.drawImage(img2, 0,0, 512, 512)
+                    }
+                    img2.src = `../../images/${effect}`    
+                }
+                
+                if(effect == "disabilities.png") {
+                                        
+
+                    var img = new Image()
+                    img.onload = function() {
+                        ctx.drawImage(img, 0,0, 512, 512)
+                        
+                        var img2 = new Image();
+                        img2.onload = function(){
+                            ctx.drawImage(img2,345,225,150, 150);
+                        }
+                        img2.src = event.target.result;
+                    }
+                    img.src = `../../images/${effect}`  
+
+                    
+                    
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);     
+            }
+    </script>
+
+</div>
+
+
